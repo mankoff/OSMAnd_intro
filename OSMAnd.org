@@ -215,7 +215,7 @@ On Android, possibly iPhone, you can now create a desktop shortcut. Press-and-ho
 
 As soon as ship anchors, or during Zodiac checkout, start recording. Because I have my tracks set to display start and end flags, this is also the same as dropping a pin at ship location. Navigating to the start flag of this track will take you back to the ship.
 
-If you configured the Widgets to display both current location and map center, then you can also just pan and zoom to the start flag and read off the ship coordinates.
+If you configured the Widgets (see below in Customizing Profiles) to display both current location and map center, then you can also just pan and zoom to the start flag and read off the ship coordinates.
 
 WARNING: Remember to stop recording when you switch from cruise to hike, so that tracks are split, can be organized in different folders, displayed differently, etc. It is possible to edit and split tracks on your phone. See
 https://osmand.net/docs/user/plan-route/create-route/#segments
@@ -227,7 +227,7 @@ https://osmand.net/docs/user/plan-route/create-route/#segments
 
 + Tap NAV icon (bottom left with arrow next to "≡" icon)
 + Tap Settings gear
-  + Navigation settings: Make sure Navigation Type is set to "straight line"
+  + Navigation settings: Make sure Navigation Type is set to "straight line" for Boat profile
 
 Whenever you are navigating, OSMAnd reports distance to destination, time to destination, and ETA.
 
