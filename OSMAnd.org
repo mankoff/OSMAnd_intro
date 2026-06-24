@@ -1,0 +1,498 @@
+
+#+INCLUDE: ~/Documents/templates/latex.org
+
+#+TITLE: OsmAnd and Quark
+#+AUTHOR: Ken Mankoff
+#+EMAIL: ken@tenruskoff.com
+
+* Table of contents                               :toc_3:noexport:
+- [[#introduction][Introduction]]
+- [[#notes][Notes]]
+  - [[#terminology][Terminology]]
+  - [[#limitations-and-work-arounds][Limitations and work-arounds]]
+- [[#installation][Installation]]
+- [[#getting-started-adding-a-new-field-site][Getting started: Adding a new field site]]
+  - [[#high-res-offline-map][High res offline map]]
+  - [[#hill-shade--slope--elevation][Hill shade / slope / elevation]]
+  - [[#contour-lines][Contour lines]]
+  - [[#satellite-view][Satellite view]]
+  - [[#other-online-maps][Other online maps]]
+  - [[#trip-recording][Trip recording]]
+  - [[#navigation][Navigation]]
+- [[#customizing-profiles][Customizing profiles]]
+  - [[#zodiac][Zodiac]]
+    - [[#turn-on-and-customize-boat-profile][Turn on and customize Boat profile]]
+    - [[#widgets][Widgets]]
+    - [[#trip-recording-and-navigation][Trip recording and navigation]]
+  - [[#hiking][Hiking]]
+    - [[#turn-on-and-customize-walking-profile][Turn on and customize Walking profile]]
+    - [[#widgets-1][Widgets]]
+    - [[#trip-recording-and-navigation-1][Trip recording and navigation]]
+  - [[#other][Other]]
+- [[#other-built-in-features][Other built-in features]]
+  - [[#north-arrow][North arrow]]
+- [[#suggested-global-edits][Suggested global edits]]
+  - [[#fast-access-to-tracks][Fast access to tracks]]
+  - [[#remove-unwanted-items-from--menu][Remove unwanted items from ≡ menu]]
+  - [[#movement-direction-vs-view-direction][Movement direction vs. view direction]]
+  - [[#organizing-tracks][Organizing tracks]]
+- [[#advanced][Advanced]]
+  - [[#analyzing-tracks][Analyzing tracks]]
+    - [[#slope-for-avalanche-safety][Slope for avalanche safety]]
+  - [[#generic-adding-custom-vector-layers][Generic: Adding custom vector layers]]
+    - [[#prepare][Prepare]]
+    - [[#import][Import]]
+  - [[#generic-importing-geotiff-as-custom-basemap-or-overlay][Generic: Importing GeoTIFF as custom basemap or overlay]]
+    - [[#prepare-1][Prepare]]
+    - [[#import-and-use][Import and use]]
+  - [[#quark-data-zodiac-heatmap][Quark data: Zodiac heatmap]]
+
+* Introduction
+
+An opinionated guide to setting up OSMAnd for Quark Guiding.
+
+A brief description why this is my go-to mapping tool:
++ Free and open source.
++ Highly customizable
++ Works offline
++ Custom layers, vector or raster
++ Multiple profiles, e.g., Zodiac, Hiking (slow), Hiking (fast), Helicopter, Quark Ship, etc.
++ Customizable: Units configurable per profile, e.g., Zodiac is kts/nm/degree_minute.frac, hiking is mph/mi/decimal_degree
++ Highly customizable
++ Have set it up so with a customized Zodiac speed (say 13 kts) so that while I am out on a Zodiac, I have a continuously updating display of distance to ship, time to ship, and ETA at ship (assuming leaving "now" at said speed).
++ Same for fast and slow hiking speeds to return to shore.
++ Includes Wikipedia pins for every geotagged Wikipedia article (1000s on the AQ Peninsula alone).
++ Highly customizable: Map orientation easily switches between: Manual rotation, Movement direction, Compass direction, North-up
++ Can import custom raster layers (e.g., recent 30 cm satellite imagery for a field site), or Strava base layer.
++ Much more...
+
+* Notes
+
++ I'm a fairly technical computer user and fan of open source software. Your phone is a powerful waterproof field computer.
++ OSMAnd is an *extremely* powerful bit of software. 
++ I use Android, but everything here should work roughly the same on iPhone.
+
+** Terminology
+
++ Offline maps :: Maps downloaded to your phone and accessible without cell or internet
++ Online maps :: Think Google Maps: Tiles downloaded as you zoom and pan. Note that OSMAnd has a good cache feature, and online maps are usable offline. However, they may be deleted if your cache is small.
++ Raster map :: Opposite of "vector map". Satellite image. Data is just pixel and color, computer doesn't know anything about any specific pixel. Image is pre-computed and cannot be changed.
++ Vector maps :: Opposite of "raster map". Made up of features and objects. These have properties and may be clickable. Everything is customizable (e.g., color, size, etc.)
++ > :: Navigating through user interface (UI) elements is shown with the ">" symbol, e.g., "≡ > Settings > Maps"
++ ROI :: Region of interest
++ AQ :: Abbreviation for Antarctica
++ GL :: Abbreviation for Greenland
+
++ The visual difference between raster and vector is not always clear. Sometimes things that look like vector maps are actually raster maps (think classic Google Maps view).
+
+** Limitations and work-arounds
+:PROPERTIES:
+:ID:       limitations
+:END:
+
++ Offline OSMAnd vector maps are low-quality in AQ
+  + Fix :: Online maps cache well, so zoom in and around current location before leaving the internet and then the 'online' tiles work offline.
++ Online OpenStreetMap and OSMAnd vector maps are low quality in AQ
+  + Fix :: Use Google Satellite view (online; cached)
++ Online OpenStreetMap and OSMAnd vector maps, even when high quality, are slightly misaligned in AQ
+  + Fix :: Use Google Satellite view (online; cached)
++ Depth charts and contours are low quality and not useful
+  + Fix :: Do not use this as a replacement for iChart.
+  + Fix :: See [[id:zodiac-heatmap][Quark data: Zodiac heatmap]]
++ Not a GIS tool. Cannot import Shapefile or Geopackage
+  + Fix :: Convert to GPX or KML. Make do with only routes and tracks. This means areas can be outlined, but not filled.
++ Not a GIS tool. Cannot import GeoTIFFs
+  + Fix :: About 5 commands in Bash can convert any GeoTIFF to OSMAnd format that can be imported. See ADVANCED section.
++ Not a GIS tool. Can only have two layers per profile.
+  + No good fix, and effectively one layer plus basemap. But you can have unlimited profiles if necessary.
+
+* Installation
+
++ App Store for iPhone or Play Store for Android
+
+Note: If you're on Android, you can install FDroid (3rd party open app store for open source software) from https://f-droid.org/en/docs/Get_F-Droid/. If you then install OSMAnd from FDroid rather than the Google Play store, you get all of the paid features for free: Contour lines, 3D topo maps, hillshade, Wikipedia layer, etc.
+
+Paid version (if not using FDroid) has some additional features that may be nice in the Arctic, but are not yet very useful in the Antarctica. These include contour lines, 3D relief, hill shade, etc.
+
+* Getting started: Adding a new field site
+
+Note: The following (offline maps, hill shade, contours) are all assuming you're in the Arctic. The following is a good exercise to learn the tool if you're in the Antarctic, but none of these are high quality in the Antarctic. I still use this tool in satellite mode.
+
+** High res offline map
+
+There are three methods to get high quality offline maps
+
++ Zoom in to region and OSMAnd offers to download for you via drop-down dialog.
++ Press and hold to drop pin. Pop-up dialog should include region name and download icon.
++ ≡ > Maps & Resources > ...
+  + Choose your area, country, region, sub-region, etc. For example, you do not need to download all of Alaska or Greenland, you can download just a sub-region.
+
+Note: Offline maps appear good everywhere that I've looked except Antarctica. In Antarctica they are terrible, and I use Google Satellite layer (online; cached so it works offline). We'll set that up below.
+
+** Hill shade / slope / elevation
+:PROPERTIES:
+:ID:       hill-shade
+:END:
+
++ If you have free FDRoid version, or paid for access, download Terrain map (3D)
++ ≡ > Maps & Resources > ...
+  + Choose your area, country, region, sub-region, etc. For example, you do not need to download all of Alaska or Greenland, you can just download a sub-region.
++ Note: In some places, for example AK, the "Standard Map" is for the whole state, but you can save space by downloading Terrain and Contour for only sub-regions.
+
+Terrain should just "show up" as hill-shade, and 3D view should just work.
+
+You can customize this, with:
+
++ Make things look bigger with: ≡ > Configure Map > Topography > 3D Relief > Vertical Exaggeration
++ Change Hillshade to Slope with: ≡ > Configure Map > Topography > Terrain > ...
+
+** Contour lines
+
++ If you have free FDRoid version, or paid for access, download Contour lines
++ ≡ > Maps & Resources > ...
+  + Choose your area, country, region, sub-region, etc. For example, you do not need to download all of Alaska or Greenland, you can just download a sub-region.
++ Choose "m" or "ft", and remember your choice, so you always choose the same.
+
+Downloading contour lines does not display them. Turn them on with:
+
++ ≡ > Configure Map > Topography > Contour Lines
+
++ Start at zoom level: 11 (low is farther out; high is closer in)
++ Color scheme: Dark orange or dark brown (seems to show up best)
++ Width: thick
+
+Trouble reading contour line values?
++ ≡ > Configure Map > Map Rendering > Text Size > 150 %
+
+** Satellite view
+
+I always have this enabled as an option, but it is necessary in the Antarctica where the offline maps are low quality and have geolocation errors.
+
++ Turn on overlay plugin
+  + ≡ > Plugins > Online Maps > Enable
++ Add overlay
+  + ≡ > Configure Map > Map source... > Add Manually
+  + Name: Google Satellite
+  + URL: https://mt1.google.com/vt/lyrs=s&x={1}&y={2}&z={0}
+  + Zoom levels: Set max to 22
+  + Save
++ Turn on overlay
+  + ≡ > Configure Map > Overlay map
+  + Select "..." text not slider button (O_)
+  + Tap on "Overlap map" and select "Google Satellite"
+  + Make sure "Show transparency seekbar" is enabled
+  + Tap on map view to exit
+
+Now, near bottom of map, between navigation icon and "zoom to current location" target icon, you should see a small blue dot on a line. Drag this blue dot right/left to turn on/off satellite map view overlay over offline vector map.
+
+Zoom in somewhere Arctic and toggle between the two and things should look good.
+
+Zoom in somewhere Antarctica and toggle between the two and things do not look good. Stick with Google Satellite.
+
+** Other online maps
+
++ OsmAnd (online tiles) should be an option after you enable the Overlay Plugin.
+  + These tiles are higher quality than the offline vector tiles
+  + They are online (network) but can be cached just like satellite tiles
+  + They look like vector, but are raster. For example, you cannot click on an object (like a park bench or mountain peak) to get details about that object. With the offline vector tiles, park benches, mountain peaks, etc. are clickable.
++ Searching the internet for "map tiles" will provide other options (e.g., strava heatmap, Stamen Watercolor, Bing imagery etc.)
+    
+
+** Trip recording
+:PROPERTIES:
+:ID:       trip-recording
+:END:
+
+We'll use the Trip Recording plugin to record all trips (Zodiac cruises; hikes). For details, see https://osmand.net/docs/user/plugins/trip-recording/
+
++ ≡ > Plugins > Trip recording: Turn ON
+
+Under Trip Recording > Settings
++ Turn on "Auto-record track during navigation"
+  + A "REC" widget appears in top right. Tap to launch recording.
+
+On Android, possibly iPhone, you can now create a desktop shortcut. Press-and-hold on OSMAnd icon, select "Start recording" from popup, and drag new icon to desktop. Tap this to jump direct to Trip Recording.
+
+As soon as ship anchors, or during Zodiac checkout, start recording. Because I have my tracks set to display start and end flags, this is also the same as dropping a pin at ship location. Navigating to the start flag of this track will take you back to the ship.
+
+If you configured the Widgets to display both current location and map center, then you can also just pan and zoom to the start flag and read off the ship coordinates.
+
+WARNING: Remember to stop recording when you switch from cruise to hike, so that tracks are split, can be organized in different folders, displayed differently, etc. It is possible to edit and split tracks on your phone. See
+https://osmand.net/docs/user/plan-route/create-route/#segments
+
+** Navigation
+:PROPERTIES:
+:ID:       navigation
+:END:
+
++ Tap NAV icon (bottom left with arrow next to "≡" icon)
++ Tap Settings gear
+  + Navigation settings: Make sure Navigation Type is set to "straight line"
+
+Whenever you are navigating, OSMAnd reports distance to destination, time to destination, and ETA.
+
++ You should be recording your cruise, starting during Zodiac checkout (see Trip Recording).
++ At some point, when you are away from the ship, start navigating back to the start flag of the trip.
++ The bottom of your screen should now show distance to, time to, and ETA at ship.
+
+WARNING: Navigation ends when you are near the destination, so if you start navigating back to ship but you do shuttle runs first, the navigation will stop. If you started recording manually, this is not a problem. Just re-start navigation when you are away from the ship. If you started recording because you started navigation and the "Auto-record track during navigation" setting, then the recording may also stop when you get near the ship.
+
+
+* Customizing profiles
+
+Everything has been done so far under the default profile, which is a globe icon in the top left of the display near the search and north arrow (see [[id:north-arrow][North arrow]]).
+
+Tap on this globe to see default profiles for car, bike, hike, and public transport. You can turn on/off profiles, duplicate, and add new custom profiles under ≡ > Settings. We will customize the Boat and Walk profile below for Quark Zodiac and Hiking.
+
+** Zodiac
+
+I like the following defaults in my Zodiac profile *always* displayed on the screen:
+
++ Current location (lon,lat)
++ Distance from current location to center of map (easy way to measure distance just by panning)
++ Distance to ship
++ Time to ship and ETA to ship, assuming 13 kts travel speed and departing now
++ In Antarctica, Google Earth overlay because OSMAnd offline and online tiles have georegistration errors
++ In Arctic, offline tiles so I can have contour lines on land
+
+We set this up in the following sections.
+
+*** Turn on and customize Boat profile
+
++ ≡ > Settings > Boat
+  + Toggle profile to On
++ ≡ > Settings > Boat > General Settings
+  + Length: Nautical miles / meters > Apply only to "Boat"
+  + Coordinate: DDD MM.MMMM
++ ≡ > Settings > Boat > Navigation settings
+  + Navigation Type: Straight line <-- IMPORTANT. Boat routing does not work in open water.
+  + Vehicle parameters
+    + Default speed: 13 kn
+    + Max speed: 13 kn
++ ≡ > Settings > Boat > Navigation settings > Map during navigation
+  + Auto center, auto zoom, etc. as you want
+
+Note - if you set up an overlay in a different profile, it will be available in all profiles, but not selected by default. You may need to re-do some settings from your default profile if you want them in Boat, Walk, or other profiles.
+
+*** Widgets
+
++ ≡ > Configure screen
+  + Right panel should have "current speed"
+  + Right panel > + > Radius ruler (provides distance to center of map)
+  + Right panel > + > Bearing > Magnetic/Relative/True (choose what you want)
+
+  + Top panel > + > Coordinates widget > Current location or Map Center (choose one or both)
+
+
+*** Trip recording and navigation
+
++ See [[id:trip-recording][Trip recording]]
++ See [[id:navigation][Navigation]]
+
+** Hiking
+
+I like the following defaults in my Hiking profile *always* displayed on the screen:
+
++ Current location (lon,lat)
++ Distance from current location to center of map (easy way to measure distance just by panning)
++ Distance to shore pickup point
++ Time of sunset, time to sunset
++ Elevation at current location
++ Elevation at center of map (easy access to estimate climb just by panning map)
+
+We set this up in the following sections  
+
+*** Turn on and customize Walking profile
+
++ ≡ > Settings > Walk
+  + Toggle profile to On
++ ≡ > Settings > Walk > General Settings
+  + Length: Choose your preferred units > Apply only to "Boat"
+  + Coordinate: Choose preferred
++ ≡ > Settings > Walk > Navigation settings
+  + Navigation Type: On Foot
+  + Vehicle parameters: Adjust speeds as needed
++ ≡ > Settings > Walk > Navigation settings > Map during navigation
+  + Auto center, auto zoom, etc. as you want
+
+Note - if you set up an overlay in a different profile, it will be available in all profiles, but not selected by default. You may need to re-do some settings from your default profile if you want them in Boat, Walk, or other profiles.
+
+*** Widgets
+
++ ≡ > Configure screen
+  + Right panel should have "current speed"
+  + Right panel > + > Radius ruler (provides distance to center of map)
+  + Right panel > + > Bearing > Magnetic/Relative/True (choose what you want)
+  + Right panel > + > Sun position > Sun position > Mode (sunset) ; Show (time left)
+    + This shows time until sunset at screen center but in time zone of phone
+  + Right panel > + > Sun position > Sunset > Show (next sunset)
+    + This shows time of next sunset at screen center but in time zone of phone
+  + Optional to only have one widget and toggle between time-of and time-until by tapping on it
+
+  + Top panel > + > Coordinates widget > Current location or Map Center (choose one or both)
+
+
+*** Trip recording and navigation
+
++ See [[id:trip-recording][Trip recording]]
++ See [[id:navigation][Navigation]]
+
+
+** Other
+
++ Feel free to add suggestions for custom profiles for helicopter, planes, how you handle walking with different group speeds, etc.
+
++ OSMAnd only allows one overlay at a time, and switching overlays takes several taps
++ It may be easier to clone a profile and have two different profiles where the only difference is the overlay
++ Similarly, if you drive two different cars or boats, and want different default units, it may be easier to set this up in two different profiles, than to change units frequently.
+
+* Other built-in features 
+
+** North arrow
+:PROPERTIES:
+:ID:       north-arrow
+:END:
+
++ Tap-and-hold on "N" arrow to quick-select between
+  + Manually rotate (two fingers spins map)
+  + Movement direction
+  + Compass direction (rotate phone, map does not rotate)
+  + North is up
++ Tap-and-drag "3D" icon to reposition
++ Tap-and-hold "+" or "-" icon to set global magnifier.
+  + WARNING: This is different than zooming in/out with these buttons.
+
+* Suggested global edits
+** Fast access to tracks
+:PROPERTIES:
+:ID:       fast-tracks
+:END:
+
+Tracks are found under ≡ > My Places > Tracks. To make tracks easier to access,
+
++ ≡ > Settings > Selected Profile > UI Customization > Drawer
++ Find Tracks (under Hidden section)
++ Tap Green arrow/circle. Tracks moves to top section (3rd item down)
++ Drag to desired location
++ Select Apply
++ Select "Apply to all profiles" to make this change global.
+
+Tracks are now accessible from ≡ > Tracks.
+
+** Remove unwanted items from ≡ menu
+
++ ≡ > Settings > Selected Profile > UI Customization > Drawer
++ Remove "Travel Guides", "Weather"
++ Only remove things after you've been using the app for a while and know what you don't want
+
+** Movement direction vs. view direction
+
++ ≡ > Settings > Selected Profile > Profile Appearance > Options > View Angle > Rest & Navigation Position.
+
+Display should now behave like this:
++ When resting, icon is dot with shaded cone showing where you are facing
++ When moving, icon is arrow head
++ Even when moving, shaded cone shows where you're facing
+
+This is useful, for example when moving (boat, airplane) but you are looking sideways and pointing your phone sideways out a window or at an object (e.g., mountain)
+    
+** Organizing tracks
+
++ You can organize tracks into any level of folders and sub-folders you want
++ For example, by region, and within regions, zodiac vs hikes, etc.
++ Different folders can have different styles applied.
+  + Tracks can have start/end flags displayed or not, display direction arrows, etc.
+  + Color can be elevation, speed, slope, etc.
+
+* Advanced
+** Analyzing tracks
+
+*** Slope for avalanche safety
+
+You can view [[id:hill-shade][Hill shade / slope / elevation]] as a 3D overlay on terrain.
+
+You can also analyze profile lines:
+
++ Tap on a mountain top nearby to drop pin
++ Tap on "Actions"
++ Tap on "Plan a route"
++ Move map to destination (see the target and line attached to original pin)
++ Tap "Add"
++ Tap "Done" (top right)
++ Tap anywhere on line then "Track" and you should see an overview graph.
++ Tap on "Altitude" and you should see a green slope graph.
+
+If you "add elevation data" before saving, it'll give you a detailed profile along the track. You can see slope everywhere, and calculate average from the reported elevation change and distance. If you only "add elevation data" after saving, it'll do it at only the two saved points (start, finish), and then you will have one slope value, which is the straight-line slope between start/finish, not terrain following.
+
+** Generic: Adding custom vector layers
+
+*** Prepare
+
+OSMAnd can import Tracks and Routes as layer types, but not polygons (areas) or other more advanced GIS features. OSMAnd can import GPX and KML as file types. I think GPX only supports tracks and routes, meaning OSMAnd can import any reasonable GPX file. KML can display more complicated features, but OSMAnd does a decent job of importing these. For example a region or polygon in KML will have the outline imported as a track.
+
+To convert a Shapefile or GeoPackage to GPX, use something like =gpsbabel= or =ogr2ogr=.
+
+#+BEGIN_SRC bash
+ogr2ogr -f GPX output.gpx input.gpkg -dialect SQLITE -sql "SELECT ST_Collect(geom) AS geom FROM input"
+#+END_SRC
+
+You can also "Export" from QGIS to KML and then import that directly, or create KML in Google Earth and import directly.
+
+*** Import
+
++ Transfer to phone (e.g., email to yourself, use file manager, etc.)
++ On Android, anywhere you can access the file, you should be able to "Share..." and then pass it to OSMAnd
++ From within OSMAnd, ≡ > Tracks (see [[id:fast-tracks][Fast access to tracks]]), create or navigate to sub-folders so you can organize layers by region, project, etc., tap the ":" menu in the top right, and import.
+
+** Generic: Importing GeoTIFF as custom basemap or overlay
+
+*** Prepare
+
+Here are example commands that take an RGB GeoTIFF, export band 1, convert to mbtiles format, then mbtiles to sqlite.
+
+#+BEGIN_SRC bash
+
+# Extract one channel from RGB
+gdal_translate -b 1 rgb.tif channel.tif
+
+# gdalinfo -hist channel.tif
+gdalinfo -stats channel.tif # see min/max or choose min/max
+
+# Scale to byte type and byte range. If less than min/max, increase contrast
+gdal_translate -ot Byte -scale 500 2000 0 255 -a_nodata 0 channel.tif stretched.tif
+
+# Reproject to Web Mercator (OSMAnd projection)
+gdalwarp -dstalpha -t_srs EPSG:3857 stretched.tif  projected.tif
+
+# Convert to mbtiles
+gdal_translate -of MBTILES -co TILE_FORMAT=PNG projected.tif scene.mbtiles
+
+# ???
+gdaladdo -r average scene.mbtiles 2 4 8 16 32 64 128 256
+
+# gh repo clone tarwirdur/mbtiles2osmand
+python3 ./mbtiles2osmand/mbtiles2osmand.py -f scene.mbtiles scene.sqlitedb
+
+# python3 ./mbtiles2osmand/unite_osmand.py input1 input2 inputN output.sqlitedb
+
+# transfere scene.sqlitedb to phone.
+#+END_SRC
+
+*** Import and use
+
+Import
++ Transfer to phone (e.g., email to yourself, use file manager, etc.)
++ On Android, anywhere you can access the file, you should be able to "Share..." and then pass it to OSMAnd
++ From within OSMAnd, ≡ > Maps & Resources > Local > Maps > ":" menu in the top right, and import.
+
+Use
+≡ > Configure Map > Overlay > select newly imported overlay option
+
+** Quark data: Zodiac heatmap
+:PROPERTIES:
+:ID:       zodiac-heatmap
+:END:
+
+If enough people at Quark shared their GPS track history with me, I'd probably have 1000s of tracks approaching various landing zones. I could create a custom heatmap of where Zodiacs drive (and therefore, likely where rocks are based on where Zodiacs do not drive), that could be shared with everyone at Quark as a custom base layer. This would effectively let OSMAnd replace iSailor on iPhone, and provide good nautical data for Android users.
+
+
