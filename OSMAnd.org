@@ -87,7 +87,7 @@ A brief description why this is my go-to mapping tool:
 
 ** Limitations and work-arounds
 :PROPERTIES:
-:ID:       limitations
+:CUSTOM_ID:       limitations
 :END:
 
 + Offline OSMAnd vector maps are low-quality in AQ
@@ -98,7 +98,7 @@ A brief description why this is my go-to mapping tool:
   + Fix :: Use Google Satellite view (online; cached)
 + Depth charts and contours are low quality and not useful
   + Fix :: Do not use this as a replacement for iChart.
-  + Fix :: See [[id:zodiac-heatmap][Quark data: Zodiac heatmap]]
+  + Fix :: See [[#quark-data-zodiac-heatmap][Zodiac heatmap]]
 + Not a GIS tool. Cannot import Shapefile or Geopackage
   + Fix :: Convert to GPX or KML. Make do with only routes and tracks. This means areas can be outlined, but not filled.
 + Not a GIS tool. Cannot import GeoTIFFs
@@ -131,7 +131,7 @@ Note: Offline maps appear good everywhere that I've looked except Antarctica. In
 
 ** Hill shade / slope / elevation
 :PROPERTIES:
-:ID:       hill-shade
+:CUSTOM_ID:       hill-shade
 :END:
 
 + If you have free FDRoid version, or paid for access, download Terrain map (3D)
@@ -200,7 +200,7 @@ Zoom in somewhere Antarctica and toggle between the two and things do not look g
 
 ** Trip recording
 :PROPERTIES:
-:ID:       trip-recording
+:CUSTOM_ID:       trip-recording
 :END:
 
 We'll use the Trip Recording plugin to record all trips (Zodiac cruises; hikes). For details, see https://osmand.net/docs/user/plugins/trip-recording/
@@ -222,7 +222,7 @@ https://osmand.net/docs/user/plan-route/create-route/#segments
 
 ** Navigation
 :PROPERTIES:
-:ID:       navigation
+:CUSTOM_ID:       navigation
 :END:
 
 + Tap NAV icon (bottom left with arrow next to "≡" icon)
@@ -240,7 +240,7 @@ WARNING: Navigation ends when you are near the destination, so if you start navi
 
 * Customizing profiles
 
-Everything has been done so far under the default profile, which is a globe icon in the top left of the display near the search and north arrow (see [[id:north-arrow][North arrow]]).
+Everything has been done so far under the default profile, which is a globe icon in the top left of the display near the search and north arrow (see [[#north-arrow][North arrow]]).
 
 Tap on this globe to see default profiles for car, bike, hike, and public transport. You can turn on/off profiles, duplicate, and add new custom profiles under ≡ > Settings. We will customize the Boat and Walk profile below for Quark Zodiac and Hiking.
 
@@ -286,8 +286,8 @@ Note - if you set up an overlay in a different profile, it will be available in 
 
 *** Trip recording and navigation
 
-+ See [[id:trip-recording][Trip recording]]
-+ See [[id:navigation][Navigation]]
++ See [[#trip-recording][Trip recording]]
++ See [[#navigation][Navigation]]
 
 ** Hiking
 
@@ -334,8 +334,8 @@ Note - if you set up an overlay in a different profile, it will be available in 
 
 *** Trip recording and navigation
 
-+ See [[id:trip-recording][Trip recording]]
-+ See [[id:navigation][Navigation]]
++ See [[#trip-recording][Trip recording]]
++ See [[#navigation][Navigation]]
 
 
 ** Other
@@ -350,7 +350,7 @@ Note - if you set up an overlay in a different profile, it will be available in 
 
 ** North arrow
 :PROPERTIES:
-:ID:       north-arrow
+:CUSTOM_ID:       north-arrow
 :END:
 
 + Tap-and-hold on "N" arrow to quick-select between
@@ -365,7 +365,7 @@ Note - if you set up an overlay in a different profile, it will be available in 
 * Suggested global edits
 ** Fast access to tracks
 :PROPERTIES:
-:ID:       fast-tracks
+:CUSTOM_ID:       fast-tracks
 :END:
 
 Tracks are found under ≡ > My Places > Tracks. To make tracks easier to access,
@@ -409,7 +409,7 @@ This is useful, for example when moving (boat, airplane) but you are looking sid
 
 *** Slope for avalanche safety
 
-You can view [[id:hill-shade][Hill shade / slope / elevation]] as a 3D overlay on terrain.
+You can view [[#hill-shade--slope--elevation][Hill shade / slope / elevation]] as a 3D overlay on terrain.
 
 You can also analyze profile lines:
 
@@ -442,7 +442,7 @@ You can also "Export" from QGIS to KML and then import that directly, or create 
 
 + Transfer to phone (e.g., email to yourself, use file manager, etc.)
 + On Android, anywhere you can access the file, you should be able to "Share..." and then pass it to OSMAnd
-+ From within OSMAnd, ≡ > Tracks (see [[id:fast-tracks][Fast access to tracks]]), create or navigate to sub-folders so you can organize layers by region, project, etc., tap the ":" menu in the top right, and import.
++ From within OSMAnd, ≡ > Tracks (see [[#fast-access-to-tracks][Fast access to tracks]]), create or navigate to sub-folders so you can organize layers by region, project, etc., tap the ":" menu in the top right, and import.
 
 ** Generic: Importing GeoTIFF as custom basemap or overlay
 
@@ -490,7 +490,7 @@ Use
 
 ** Quark data: Zodiac heatmap
 :PROPERTIES:
-:ID:       zodiac-heatmap
+:CUSTOM_ID:       zodiac-heatmap
 :END:
 
 If enough people at Quark shared their GPS track history with me, I'd probably have 1000s of tracks approaching various landing zones. I could create a custom heatmap of where Zodiacs drive (and therefore, likely where rocks are based on where Zodiacs do not drive), that could be shared with everyone at Quark as a custom base layer. This would effectively let OSMAnd replace iSailor on iPhone, and provide good nautical data for Android users.
