@@ -307,7 +307,7 @@ We set this up in the following sections
 + ≡ > Settings > Walk
   + Toggle profile to On
 + ≡ > Settings > Walk > General Settings
-  + Length: Choose your preferred units > Apply only to "Boat"
+  + Length: Choose your preferred units > Apply only to "Walking"
   + Coordinate: Choose preferred
 + ≡ > Settings > Walk > Navigation settings
   + Navigation Type: On Foot
