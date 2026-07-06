@@ -31,6 +31,7 @@
   - [[#other][Other]]
 - [[#other-built-in-features][Other built-in features]]
   - [[#north-arrow][North arrow]]
+  - [[#offline-cache][Offline cache]]
 - [[#suggested-global-edits][Suggested global edits]]
   - [[#fast-access-to-tracks][Fast access to tracks]]
   - [[#remove-unwanted-items-from--menu][Remove unwanted items from ≡ menu]]
@@ -361,6 +362,22 @@ Note - if you set up an overlay in a different profile, it will be available in 
 + Tap-and-drag "3D" icon to reposition
 + Tap-and-hold "+" or "-" icon to set global magnifier.
   + WARNING: This is different than zooming in/out with these buttons.
+
+** Offline cache
+:PROPERTIES:
+:CUSTOM_ID: offline-cache
+:END:
+
+Caching is easiest to do when nearby and on wifi. For example, on the ship zoom in and pan around. Your basemap and overlay and underlay layers will all download and be cached and then the map view works when off wifi. You can do this for your local region, or regions you know you will go to before you get there. This works for small areas, because panning around at high zoom level takes time.
+
+If you want to build a big cache for a large area,
++ Press and hold on the map to drop a pin
++ Select "Actions" sub-menu
++ Select "Download map"
++ Choose your source (Microsoft Earth, Google Earth, other layers, etc.)
++ Choose min and max zoom level.
++ WARNING: If your current map view is covering a large area, and you select a high Max Zoom level, the number of tiles and download size may be massive.
++ Note: Download size is likely an overestimate for polar work, where mostly snow or ocean landscapes probably compress well
 
 * Suggested global edits
 ** Fast access to tracks
