@@ -51,12 +51,9 @@
 
 * Screenshots
 
-
-<p align="center">
-<img src="wiki.png" alt="Screenshot of map with Wikipedia layer" width="400">
-<br>
-<img src="nav.png" alt="Screenshot of map with navigation info" width="400">
-</p>
+#+html: <p align="center"><img src="wiki.png" alt="Screenshot of map with Wikipedia layer" width="400"></p>
+#+html: <br>
+#+html: <p align="center"><img src="nav.png" alt="Screenshot of map with navigation info" width="400"></p>
 
 * Introduction
 
